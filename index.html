@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>post</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body style="background-color: black;">
+    <section>
+        <h1 align="center" style="color: #31FFAE;"><i>Fetch API</i></h1>
+        <div class="container">
+            <div class="row" id="record"></div>
+        </div>
+    </section>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    fetch("https://dummyjson.com/posts")
+    .then(rec => rec.json())
+    .then((rec)=>{
+        let post=rec.posts;
+        let tbl="";
+        post.map ((val)=>{
+            tbl +=`
+                <div class="col-md-4 mb-3 mt-3">
+                    <div class="card" style="width: 18rem;height:510px;color:#F7E50D;background-color: black; border-radius:15px;  box-shadow: 8px 17px 12px 5px #F7E50D;">
+                            <div class="card-body">
+                                <h2 class="card-title">Id:- ${val.id}</h2>
+                                <h5 class="card-title">${val.title}</h5>
+                                <p class="card-text"style="font-size:14px;">${val.body}</p>
+                                <h5 class="card-title">UserId:- ${val.userId}</h5>
+                                <h6 class="card-title">Tags:${val.tags}</h6>
+                                <h5 class="card-title">reactions:- ${val.reactions}</h5>
+                            </div>
+                            </div>
+                    </div>
+            `
+        })
+        document.getElementById('record').innerHTML=tbl;
+    })
+</script>
+</html>
